@@ -68,8 +68,18 @@
     </div>
 
   <script>
+    function setDate() {
+        var now = new Date();
+        var secondHand = document.querySelector(".second-hand");
+
+        var seconds = now.getSeconds();
+        var secondsDegrees = ((seconds / 60) * 360) + 90;
+        secondHand.style.transform = "rotate(" + secondsDegrees + "deg)";
 
 
+    }
+
+    setInterval(setDate, 1000);
   </script>
 </body>
 </html>
