@@ -71,11 +71,15 @@
     function setDate() {
         var now = new Date();
         var secondHand = document.querySelector(".second-hand");
+        var minsHand = document.querySelector(".min-hand");
 
         var seconds = now.getSeconds();
         var secondsDegrees = ((seconds / 60) * 360) + 90;
         secondHand.style.transform = "rotate(" + secondsDegrees + "deg)";
 
+        var minutes = now.getMinutes();
+        var minutesDegrees = ((minutes / 60) * 360) + 90;
+        minsHand.style.transform = "rotate(" + minutesDegrees + "deg)";
 
     }
 
