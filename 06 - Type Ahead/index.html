@@ -33,6 +33,30 @@
           return place.city.match(regex) || place.state.match(regex);
       });
   }
+
+  function numberWithCommas(x) {
+      return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  function displayMatches() {
+      self = this;
+      var matchArray = findMatches((this.value), cities);
+      var html = matchArray.map(function (place) {
+          var regex = new RegExp(self.value, "gi");
+          var cityName = place.city.replace(regex, "<span class='hl'>" + self.value + "</span>");
+          var stateName = place.state.replace(regex, "<span class='hl'>" + self.value + "</span>");
+          return "<li>" +
+                  "<span class='name'>" + cityName + ", " + stateName + "</span>" +
+                  "<span class='population'>"+ numberWithCommas(place.population) + "</span>"
+              + "</li>";
+      }).join("");
+      suggestions.innerHTML = html;
+  }
+  var searchInput = document.querySelector(".search");
+  var suggestions = document.querySelector(".suggestions");
+
+  searchInput.addEventListener("change", displayMatches);
+  searchInput.addEventListener("keyup", displayMatches);
 </script>
   </body>
 </html>
