@@ -25,7 +25,14 @@
       })
       .then(function (data) {
           return cities.push.apply(cities, data);
-      })
+      });
+  
+  function findMatches(wordToMatch, cities) {
+      return cities.filter(function (place) {
+          var regex = new RegExp(wordToMatch, "gi");
+          return place.city.match(regex) || place.state.match(regex);
+      });
+  }
 </script>
   </body>
 </html>
