@@ -29,7 +29,7 @@
     var isAdult = people.some(function (person) {
        var currentYear = (new Date()).getFullYear();
 
-       if (currentYear >= 19) {
+       if (currentYear - person.year >= 19) {
            return true;
        }
     });
@@ -37,7 +37,14 @@
     console.log(isAdult);
 
     // Array.prototype.every() // is everyone 19 or older?
+    var allAdult = people.every(function (person) {
+        var currentYear = (new Date()).getFullYear();
+        if (currentYear - person.year >= 19) {
+            return true;
+        }
+    });
 
+    console.log(allAdult);
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
