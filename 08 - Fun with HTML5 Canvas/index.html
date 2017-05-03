@@ -21,19 +21,22 @@
     ctx.strokeStyle = '#BADA55';
     ctx.lineJoin = 'round';
     ctx.lineCap = 'round';
+    ctx.lineWidth = 50;
 
     var isDrawing = false;
     var lastX = 0;
     var lastY = 0;
+    var hue = 0;
 
     canvas.addEventListener("mousemove", function (e) {
         if(!isDrawing){ return; }
+        ctx.strokeStyle = "hsl(" + hue +  ", 100%, 50%)";
         ctx.beginPath();
         ctx.moveTo(lastX, lastY);
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
-
         [lastX, lastY] = [e.offsetX, e.offsetY];
+        hue++;
     });
     canvas.addEventListener("mousedown", function(e) {
         isDrawing = true;
