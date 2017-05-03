@@ -33,11 +33,12 @@
         ctx.lineTo(e.offsetX, e.offsetY);
         ctx.stroke();
 
-        lastX = e.offsetX;
-        lastY = e.offsetY;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
     });
-    canvas.addEventListener("mousedown", function() {
+    canvas.addEventListener("mousedown", function(e) {
         isDrawing = true;
+
+        [lastX, lastY] = [e.offsetX, e.offsetY];
     });
     canvas.addEventListener("mouseup", function() {
         isDrawing = false;
