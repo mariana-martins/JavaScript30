@@ -1,19 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>HTML5 Canvas</title>
+    <meta charset="UTF-8">
+    <title>HTML5 Canvas</title>
+    <style>
+        html, body {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-<canvas id="draw" width="800" height="800"></canvas>
+    <canvas id="draw" width="800" height="800"></canvas>
+
 <script>
+    var canvas = document.querySelector('#draw');
+    var ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    ctx.strokeStyle = '#BADA55';
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+
+    var isDrawing = false;
+    var lastX = 0;
+    var lastY = 0;
+
+    canvas.addEventListener("mousemove", function (e) {
+        if(!isDrawing){ return; }
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+
+        lastX = e.offsetX;
+        lastY = e.offsetY;
+    });
+    canvas.addEventListener("mousedown", function() {
+        isDrawing = true;
+    });
+    canvas.addEventListener("mouseup", function() {
+        isDrawing = false;
+    });
+    canvas.addEventListener("mouseout", function() {
+        isDrawing = false;
+    });
+
 </script>
-
-<style>
-  html, body {
-    margin:0;
-  }
-</style>
-
 </body>
 </html>
