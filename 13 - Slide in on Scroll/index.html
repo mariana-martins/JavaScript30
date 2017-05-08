@@ -202,7 +202,13 @@
 </div>
 
 <script>
-    function debounce(func, wait = 20, immediate = true) {
+    function debounce(func, wait, immediate) {
+        if (!wait){
+            wait = 20
+        }
+        if (!immediate) {
+            immediate = true;
+        }
         var timeout;
         return function () {
             var context = this, args = arguments;
