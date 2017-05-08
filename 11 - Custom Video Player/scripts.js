@@ -15,4 +15,17 @@ function togglePlay() {
         video.pause();
     }
 }
+
+function updateButton() {
+    if (video.paused){
+        toggle.textContent = "►"
+    } else {
+        toggle.textContent = "▌▌";
+    }
+}
 // Hook up the event listners
+video.addEventListener("click", togglePlay);
+video.addEventListener("play", updateButton);
+video.addEventListener("pause", updateButton);
+
+toggle.addEventListener("click", togglePlay);
