@@ -54,4 +54,20 @@ ranges.forEach(function (range) {
     range.addEventListener("change", handleRangeUpdate);
 });
 
+
+var mousedown = false;
+
 progress.addEventListener("click", scrub);
+progress.addEventListener("mousemove", function(e) {
+    if (mousedown){
+        scrub(e);
+    }
+
+});
+progress.addEventListener("mousedown", function () {
+    mousedown = true;
+});
+progress.addEventListener("mouseup", function () {
+    mousedown = false;
+});
+
