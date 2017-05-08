@@ -1,4 +1,3 @@
-// Get our elements
 var player = document.querySelector(".player");
 var video = player.querySelector(".viewer");
 var progress = player.querySelector(".progress");
@@ -7,7 +6,6 @@ var toggle = player.querySelector(".toggle");
 var skipButtons = player.querySelectorAll("[data-skip]");
 var ranges = player.querySelectorAll(".player__slider");
 
-//Build our functions
 function togglePlay() {
     if (video.paused){
         video.play();
@@ -36,7 +34,11 @@ function handleProgress() {
     var percent = (video.currentTime / video.duration) * 100;
     progressBar.style.flexBasis = percent + "%";
 }
-// Hook up the event listners
+
+function scrub(e) {
+    video.currentTime = (e.offsetX / progress.offsetWidth) * video.duration;
+}
+
 video.addEventListener("click", togglePlay);
 video.addEventListener("play", updateButton);
 video.addEventListener("pause", updateButton);
@@ -51,3 +53,5 @@ skipButtons.forEach(function (button) {
 ranges.forEach(function (range) {
     range.addEventListener("change", handleRangeUpdate);
 });
+
+progress.addEventListener("click", scrub);
