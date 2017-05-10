@@ -32,17 +32,33 @@
 
     function addItem(e) {
         e.preventDefault();
-        var text = (this.querySelector("[name=item]")).value;
-
-        var item = {
+        const text = (this.querySelector('[name=item]')).value;
+        const item = {
             name: text,
             done: false
         };
 
-        console.log(item);
+        items.push(item);
+        populateList(items, itemsList);
+        this.reset();
     }
 
-    addItems.addEventListener("submit", addItem);
+    function populateList(plates, plateList) {
+        if(!plates) {
+            plates = [];
+        }
+        plateList.innerHTML = plates.map(function (plate, i) {
+            // TODO: Change the syntax
+            return `
+                    <li>
+                      <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+                      <label for="item${i}">${plate.name}</label>
+                    </li>
+                   `;
+        }).join('');
+    }
+
+    addItems.addEventListener('submit', addItem);
 
 </script>
 
