@@ -45,22 +45,19 @@
     }
 
     function populateList(plates, plateList) {
-        if(!plates) {
+        if (!plates) {
             plates = [];
         }
         plateList.innerHTML = plates.map(function (plate, i) {
-            // TODO: Change the syntax
-            return `
-                    <li>
-                      <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
-                      <label for="item${i}">${plate.name}</label>
-                    </li>
-                   `;
+            return "<li>" +
+                      '<input type="checkbox" data-index="'+i+'" id="item'+i+'" '+(plate.done ? 'checked' : '')+' />' +
+                      '<label for="item'+i+'">'+plate.name+'</label>' +
+                    '</li>';
         }).join('');
     }
-    
+
     function toggleDone(e) {
-        if (!e.target.matches('input')) return; 
+        if (!e.target.matches('input')) return;
         const event = e.target;
         const index = event.dataset.index;
         items[index].done = !items[index].done;
@@ -72,8 +69,6 @@
     itemsList.addEventListener('click', toggleDone);
     populateList(items, itemsList);
 </script>
-
-
 </body>
 </html>
 
