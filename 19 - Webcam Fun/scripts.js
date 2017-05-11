@@ -4,6 +4,7 @@ var ctx = canvas.getContext('2d');
 var strip = document.querySelector('.strip');
 var snap = document.querySelector('.snap');
 
+// Add video from webcam
 function getVideo() {
     navigator.mediaDevices.getUserMedia({video: true, audio: false})
         .then(function (localMediaStream) {
@@ -16,6 +17,7 @@ function getVideo() {
         });
 }
 
+// Display a big image from webcam
 function paintToCanvas() {
     var width = video.videoWidth;
     var height = video.videoHeight;
@@ -25,6 +27,12 @@ function paintToCanvas() {
     return setInterval(function () {
         ctx.drawImage(video, 0, 0, width, height);
     }, 16);
+}
+
+// Play audio when take a photo
+function takePhoto() {
+    snap.currentTime = 0;
+    snap.play();
 }
 
 getVideo();
