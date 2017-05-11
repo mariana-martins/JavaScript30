@@ -16,4 +16,16 @@ function getVideo() {
         });
 }
 
+function paintToCanvas() {
+    var width = video.videoWidth;
+    var height = video.videoHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    return setInterval(function () {
+        ctx.drawImage(video, 0, 0, width, height);
+    }, 16);
+}
+
 getVideo();
+
