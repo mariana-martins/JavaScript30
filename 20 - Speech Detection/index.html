@@ -69,11 +69,15 @@
           })
           .join('');
 
-      console.log(transcript);
+      paragraph.textContent = transcript;
+      if (e.results[0].isFinal) {
+          paragraph = document.createElement("p");
+          words.appendChild(paragraph);
+      }
   });
 
   recognition.addEventListener("end", recognition.start);
-  
+
   recognition.start();
 </script>
 </body>
