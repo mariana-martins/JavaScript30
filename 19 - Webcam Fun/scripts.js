@@ -29,7 +29,11 @@ function paintToCanvas() {
         var pixels = ctx.getImageData(0, 0, width, height);
         // mess with them
         // pixels = redEffect(pixels);
-        pixels = rgbSplit(pixels);
+
+        // pixels = rgbSplit(pixels);
+        // ctx.globalAlpha = 0.8;
+
+        pixels = greenScreen(pixels);
         ctx.putImageData(pixels, 0, 0);
     }, 16);
 }
@@ -67,6 +71,32 @@ function rgbSplit(pixels) {
     return pixels;
 }
 
+function greenScreen(pixels) {
+    const levels = {};
+
+    document.querySelectorAll('.rgb input').forEach(function (input) {
+        levels[input.name] = input.value;
+    });
+
+    for (var i = 0; i < pixels.data.length; i = i + 4) {
+        var red = pixels.data[i + 0];
+        var green = pixels.data[i + 1];
+        var blue = pixels.data[i + 2];
+        var alpha = pixels.data[i + 3];
+
+        if (red >= levels.rmin
+            && green >= levels.gmin
+            && blue >= levels.bmin
+            && red <= levels.rmax
+            && green <= levels.gmax
+            && blue <= levels.bmax) {
+
+            pixels.data[i + 3] = 0;
+        }
+    }
+
+    return pixels;
+}
 
 getVideo();
 
