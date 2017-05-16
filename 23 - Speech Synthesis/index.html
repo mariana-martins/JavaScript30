@@ -55,13 +55,27 @@
         toggle();
     }
     
-    function toggle() {
+    function toggle(startOver) {
         speechSynthesis.cancel();
-        speechSynthesis.speak(msg);
+        if(!startOver){
+            startOver = true;
+        }
+        if (startOver) {
+            speechSynthesis.speak(msg);
+        }
     }
-
+    
+    function setOption() {
+        console.log(this.name, this.value);
+        msg[this.name] = this.value;
+        toggle();
+    }
+    
     speechSynthesis.addEventListener('voiceschanged', populateVoices);
     voicesDropdown.addEventListener('change', setVoice);
+    options.forEach(function (option) {
+        option.addEventListener('change', setOption);
+    })
 </script>
 
 </body>
