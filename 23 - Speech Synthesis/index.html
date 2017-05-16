@@ -47,7 +47,21 @@
             .join('');
     }
 
+    function setVoice() {
+        var that = this;
+        msg.voice = voices.find(function (voice) {
+            return voice.name === that.value;
+        });
+        toggle();
+    }
+    
+    function toggle() {
+        speechSynthesis.cancel();
+        speechSynthesis.speak(msg);
+    }
+
     speechSynthesis.addEventListener('voiceschanged', populateVoices);
+    voicesDropdown.addEventListener('change', setVoice);
 </script>
 
 </body>
