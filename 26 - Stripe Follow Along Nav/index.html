@@ -225,7 +225,12 @@
     var nav = document.querySelector('.top');
 
     function handleEnter() {
-        console.log("Enter!!!!");
+        var that = this;
+        console.log(that);
+        that.classList.add('trigger-enter');
+        setTimeout(function () {
+            that.classList.add('trigger-enter-active');
+        }, 150);
     }
 
     function handleLeave() {
