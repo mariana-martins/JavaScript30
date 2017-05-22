@@ -73,12 +73,15 @@
     var background = document.querySelector('.dropdownBackground');
     var nav = document.querySelector('.top');
 
+    // Add dropdown
     function handleEnter() {
         var that = this;
         console.log(that);
         that.classList.add('trigger-enter');
         setTimeout(function () {
-            that.classList.add('trigger-enter-active');
+            if (that.classList.contains('trigger-enter')){
+                that.classList.add('trigger-enter-active');
+            }
         }, 150);
         background.classList.add('open');
 
@@ -93,11 +96,13 @@
             left: dropdownCoords.left - navCoords.left
         };
 
+        // Add a white background at each dropdown
         background.style.setProperty('width', coords.width + 'px');
         background.style.setProperty('height', coords.height + 'px');
         background.style.setProperty('transform', 'translate(' + coords.left + 'px, ' + coords.top + 'px)');
     }
 
+    // Remove dropdown
     function handleLeave() {
         this.classList.remove('trigger-enter-active');
         background.classList.remove('open');
