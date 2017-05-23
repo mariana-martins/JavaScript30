@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Click and Drag</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Click and Drag</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="items">
+<div class="items">
     <div class="item item1">01</div>
     <div class="item item2">02</div>
     <div class="item item3">03</div>
@@ -32,10 +32,42 @@
     <div class="item item23">23</div>
     <div class="item item24">24</div>
     <div class="item item25">25</div>
-  </div>
+</div>
 
 <script>
+    var slider = document.querySelector('.items');
+    var isDown = false;
+    var startX;
+    var scrollLeft;
+
+    slider.addEventListener('mousedown', function (e) {
+        isDown = true;
+        slider.classList.add('active');
+
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+
+    slider.addEventListener('mouseleave', function () {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', function () {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mousemove', function (e) {
+        if(!isDown) {
+            return;
+        }
+        e.preventDefault();
+        var x = e.pageX - slider.offsetLeft;
+        var walk = (x - startX) * 3;
+        slider.scrollLeft = scrollLeft - walk;
+    });
 </script>
 
-  </body>
+</body>
 </html>
