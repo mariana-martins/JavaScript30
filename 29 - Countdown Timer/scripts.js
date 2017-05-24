@@ -44,6 +44,15 @@ function startTimer() {
     timer(seconds);
 }
 
+function submitForm(e) {
+    e.preventDefault();
+    var mins = this.minutes.value;
+    timer(mins * 60);
+    this.reset();
+}
+
 buttons.forEach(function (button) {
     button.addEventListener('click', startTimer);
 });
+
+document.customForm.addEventListener('submit', submitForm);
