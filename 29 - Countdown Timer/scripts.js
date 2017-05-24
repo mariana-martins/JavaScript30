@@ -51,8 +51,10 @@ function submitForm(e) {
     this.reset();
 }
 
+// Start the timer from buttons
 buttons.forEach(function (button) {
     button.addEventListener('click', startTimer);
 });
 
+// Get minutes from the form
 document.customForm.addEventListener('submit', submitForm);
