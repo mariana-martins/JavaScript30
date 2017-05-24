@@ -1,10 +1,11 @@
 var countdown;
 var timerDisplay = document.querySelector('.display__time-left');
-
+var endTime = document.querySelector('.display__end-time');
 function timer(seconds) {
     var now = Date.now();
     var then = now + seconds * 1000;
     displayTimeLeft(seconds);
+    displayEndTime(then);
 
     countdown = setInterval(function () {
         var secondsLeft = Math.round((then - Date.now()) / 1000);
@@ -24,4 +25,11 @@ function displayTimeLeft(seconds) {
     var display = minutes + ':' + (remainderSeconds < 10 ? '0' : '') + remainderSeconds;
     document.title = display;
     timerDisplay.textContent = display;
+}
+
+function displayEndTime(timestamp) {
+    var end = new Date(timestamp);
+    var hour = end.getHours();
+    var minutes = end.getMinutes();
+    endTime.textContent = 'Be back at ' + (hour > 12 ? hour - 12 : hour) + ':' + (minutes < 10 ? '0' : '') + minutes;
 }
