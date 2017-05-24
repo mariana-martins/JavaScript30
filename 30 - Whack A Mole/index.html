@@ -62,12 +62,21 @@
         var hole = randomHole(holes);
 
         hole.classList.add('up');
+
         setTimeout(function () {
             hole.classList.remove('up');
-            peep();
-
             if (!timeUp) peep();
         }, time);
+    }
+    
+    function startGame() {
+        scoreBoard.textContent = 0;
+        timeUp = false;
+        peep();
+
+        setTimeout(function () {
+            return timeUp = true;
+        }, 10000);
     }
 </script>
 </body>
