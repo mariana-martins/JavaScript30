@@ -38,6 +38,7 @@
     var moles = document.querySelectorAll('.mole');
     var lastHole;
     var timeUp = false;
+    var score = 0;
     
     function randomTime(min, max) {
         return Math.round(Math.random() * (max - min) + min);
@@ -72,12 +73,25 @@
     function startGame() {
         scoreBoard.textContent = 0;
         timeUp = false;
+        score = 0;
         peep();
 
         setTimeout(function () {
             return timeUp = true;
         }, 10000);
     }
+
+    function bonk(e) {
+        if (!e.isTrusted) return;
+        score++;
+        this.classList.remove('up');
+        scoreBoard.textContent = score;
+    }
+
+    moles.forEach(function (mole) {
+        mole.addEventListener('click', bonk);
+    });
+
 </script>
 </body>
 </html>
